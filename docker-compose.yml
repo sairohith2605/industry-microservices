@@ -1,7 +1,7 @@
 # Setting up this compose file intending to run the Kafka service, alongside the microservices
 # and any others supporting the experimentation.
 
-# Reference: https://www.baeldung.com/ops/kafka-docker-setup
+# Kafka/ZookeeperReference: https://www.baeldung.com/ops/kafka-docker-setup
 version: '2'
 services:
   zookeeper:
@@ -25,3 +25,17 @@ services:
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+
+  postgres:
+    image: postgres:17.2
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: inventory
+    ports:
+      - 5435:5432
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+volumes:
+  postgres-data:
