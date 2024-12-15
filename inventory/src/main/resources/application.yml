@@ -13,3 +13,8 @@ spring:
     password: ${DB_PASSWORD}
     locations: classpath:migrations
     enabled: true
+
+application:
+  kafka:
+    topic: ${KAFKA_INVENTORY_TOPIC}
+    bootstrap-servers: ${KAFKA_SERVER_URI}
